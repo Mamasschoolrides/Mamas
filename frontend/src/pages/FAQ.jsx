@@ -22,7 +22,7 @@ const FAQS = [
   },
   {
     q: "Do you transport siblings?",
-    a: "Happily! Siblings from the same household riding the same route and schedule get a reduced sibling rate for each additional child. Just mention it on your route inquiry and I'll put together exact pricing for your family.",
+    a: "Happily! Siblings from the same household riding the same route and schedule get reduced rates: the first child is $550/month, the second sibling adds $350/month, and the third adds $250/month — so two children ride for $900/month and three for $1,150/month. Mention your crew on the route inquiry and I'll confirm the exact total.",
   },
   {
     q: "What happens if my child is sick?",

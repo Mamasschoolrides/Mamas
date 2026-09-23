@@ -126,10 +126,32 @@ export default function Pricing() {
             <div>
               <h2 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">Siblings ride together for less.</h2>
               <p className="mt-3 max-w-2xl leading-relaxed text-ink/70">
-                If you have two or more kids from the same household on the same route and schedule,
-                each additional child rides at a reduced sibling rate. Mention it on your route inquiry
-                and I'll work out exact pricing for your family — it's one of my favourite ways to help
-                local families.
+                For kids from the same household riding the same route and schedule, each additional child
+                costs less than the first:
+              </p>
+              <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-3">
+                <div data-testid="sibling-rate-1" className="rounded-2xl border border-line bg-cream p-5 text-center">
+                  <p className="text-xs font-bold uppercase tracking-widest text-ink/50">First child</p>
+                  <p className="mt-1.5 font-serif text-3xl font-semibold text-ink">$550<span className="text-sm font-sans font-medium text-ink/55">/mo</span></p>
+                </div>
+                <div data-testid="sibling-rate-2" className="rounded-2xl border border-line bg-cream p-5 text-center">
+                  <p className="text-xs font-bold uppercase tracking-widest text-ink/50">Second sibling</p>
+                  <p className="mt-1.5 font-serif text-3xl font-semibold text-ink">+$350<span className="text-sm font-sans font-medium text-ink/55">/mo</span></p>
+                </div>
+                <div data-testid="sibling-rate-3" className="rounded-2xl border border-line bg-cream p-5 text-center">
+                  <p className="text-xs font-bold uppercase tracking-widest text-ink/50">Third sibling</p>
+                  <p className="mt-1.5 font-serif text-3xl font-semibold text-ink">+$250<span className="text-sm font-sans font-medium text-ink/55">/mo</span></p>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2.5 text-sm font-semibold">
+                <span className="rounded-full bg-blush px-4 py-1.5 text-terra-dark">1 child: $550/mo</span>
+                <span className="rounded-full bg-blush px-4 py-1.5 text-terra-dark">2 children: $900/mo</span>
+                <span className="rounded-full bg-blush px-4 py-1.5 text-terra-dark">3 children: $1,150/mo</span>
+              </div>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/60">
+                Sibling rates apply to round-trip service from the same household on the same route and
+                schedule. Mention your crew on the route inquiry and I'll confirm the exact total for your
+                family — it's one of my favourite ways to help local families.
               </p>
             </div>
           </div>

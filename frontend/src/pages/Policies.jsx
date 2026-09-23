@@ -21,7 +21,7 @@ const POLICIES = {
       {
         h: "Part D — Fees",
         items: [
-          "Monthly amount: as confirmed at registration (Round Trip $550/month, One-Way $425/month, sibling rates as quoted).",
+          "Monthly amount: as confirmed at registration (Round Trip $550/month, One-Way $425/month; siblings on the same route: +$350/month for the second child, +$250/month for the third).",
           "Payment date: monthly fees are due in advance, on or before the first school day of each month.",
           "Late payment: if payment is more than 5 days late, service may be paused until the account is current. We'll always reach out before pausing — life happens, talk to us.",
           "Failed payment: declined or returned payments must be corrected within 5 days; after that, the reserved seat may be released to a waitlisted family.",
