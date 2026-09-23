@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Outfit:wght@300..700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 45 33% 98%;
+        --foreground: 20 10% 15%;
+        --card: 30 33% 94%;
+        --card-foreground: 20 10% 15%;
+        --popover: 45 33% 98%;
+        --popover-foreground: 20 10% 15%;
+        --primary: 14 75% 64%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 22 40% 90%;
+        --secondary-foreground: 20 10% 15%;
+        --muted: 30 25% 92%;
+        --muted-foreground: 24 12% 40%;
+        --accent: 32 85% 67%;
+        --accent-foreground: 20 10% 15%;
+        --destructive: 0 72% 55%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 22 35% 85%;
+        --input: 22 35% 85%;
+        --ring: 14 75% 64%;
+        --radius: 0.9rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+    body {
+        @apply bg-cream text-ink font-sans antialiased;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    ::selection {
+        background: #E87A5D;
+        color: #FDFBF7;
+    }
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #F7F2EB;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #E87A5D;
+        border-radius: 8px;
+        border: 2px solid #F7F2EB;
+    }
+    input[type="date"], input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+        @apply text-base;
+    }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}

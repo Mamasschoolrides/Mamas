@@ -1,0 +1,184 @@
+{
+  "project_info": {
+    "name": "Mama's School Rides",
+    "location": "McConachie & Surrounding Communities, Edmonton, AB",
+    "tagline": "Private. Door-to-door. Mom-driven.",
+    "founder": "[Your Name] (Mom of 3 & Lead Driver)",
+    "contact": {
+      "phone": "(780) 555-1234",
+      "email": "hello@mamasschoolrides.ca"
+    },
+    "app_type": "marketing_site"
+  },
+  "emotional_archetype": "ARCHETYPE 1: ORGANIC & EARTHY (Trust, Warmth, Family-First Care)",
+  "design_direction": {
+    "vibe": "Awwwards Site-of-the-Day editorial warmth. High-craft, human-centered school transit site. Soft organic shapes, badge trust strips, signature masked line-by-line reveal hero, clipped polaroid/spotlight frames, and floating sticky mobile CTA.",
+    "anti_patterns": [
+      "NO generic corporate blue or cold tech gradients (#7351B7 or #1B93A4 forbidden)",
+      "NO rigid square boxes — use organic rounded corners (rounded-2xl, rounded-3xl)",
+      "NO Inter/Roboto for main titles — use warm display serif and organic humanist fonts",
+      "NO placeholder text for logos or trust badges — render real micro SVG badges",
+      "NO plain full-screen dark overlays over photos — keep overlays light and warm"
+    ]
+  },
+  "typography": {
+    "head_font": "Fraunces / Playfair Display / Cabinet Grotesk (Warm Display Serif & Expressive Headings)",
+    "body_font": "Outfit / Plus Jakarta Sans (Friendly, organic, ultra-legible)",
+    "mono_font": "JetBrains Mono (For route codes and timestamps)",
+    "hierarchy": {
+      "hero_h1": "text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight leading-[1.15]",
+      "section_h2": "text-2xl sm:text-3xl lg:text-4xl font-serif tracking-tight text-amber-950",
+      "subsection_h3": "text-xl sm:text-2xl font-sans font-semibold text-amber-900",
+      "body": "text-base sm:text-lg text-amber-900/80 leading-relaxed",
+      "small_label": "text-xs font-semibold uppercase tracking-[0.2em] text-amber-800/70"
+    }
+  },
+  "colors": {
+    "base_background": "#FDFBF7",
+    "card_background": "#F7F2EB",
+    "warm_cream": "#F5EBE6",
+    "primary_brand": "#E87A5D",
+    "primary_hover": "#D9684B",
+    "sunshine_amber": "#F4A261",
+    "soft_sage": "#88AB8E",
+    "deep_charcoal": "#2B2523",
+    "warm_border": "#E6D7CE",
+    "badge_gold": "#E9C46A",
+    "tailwind_palette": {
+      "bg-main": "bg-[#FDFBF7]",
+      "bg-surface": "bg-[#F7F2EB]",
+      "bg-surface-accent": "bg-[#F5EBE6]",
+      "text-main": "text-[#2B2523]",
+      "text-muted": "text-[#2B2523]/70",
+      "cta-primary": "bg-[#E87A5D] hover:bg-[#D9684B] text-white shadow-lg shadow-[#E87A5D]/25 transition-all duration-300 transform hover:-translate-y-0.5",
+      "badge-pill": "bg-[#F5EBE6] text-[#E87A5D] border border-[#E87A5D]/20",
+      "border-warm": "border-[#E6D7CE]"
+    }
+  },
+  "logo_and_mark": {
+    "concept": "Mama's Sunburst Van SVG Mark - A stylized, gentle line-art illustration combining a sun, heart, and family van route path.",
+    "svg_code": "<svg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'><circle cx='20' cy='20' r='18' fill='#F5EBE6' stroke='#E87A5D' stroke-width='2'/><path d='M12 24C12 20.6863 14.6863 18 18 18H22C25.3137 18 28 20.6863 28 24V25C28 26.1046 27.1046 27 26 27H14C12.8954 27 12 26.1046 12 25V24Z' fill='#E87A5D'/><circle cx='16' cy='27' r='2.5' fill='#2B2523'/><circle cx='24' cy='27' r='2.5' fill='#2B2523'/><path d='M20 12V15M14.5 14L16.5 16.5M25.5 14L23.5 16.5' stroke='#F4A261' stroke-width='2' stroke-linecap='round'/></svg>"
+  },
+  "image_urls": {
+    "hero_driver": "https://images.unsplash.com/photo-1689866499898-cf0842274e60?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwbW9tJTIwcG9ydHJhaXQlMjBmYW1pbHklMjBjYXIlMjB2YW4lMjBkcml2ZXJ8ZW58MHx8fHwxNzkwMTk5MTAyfDA&ixlib=rb-4.1.0&q=85",
+    "mom_and_kids": "https://images.unsplash.com/photo-1688366777935-fa08c9ffb358?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxtb3RoZXIlMjBkcml2aW5nJTIwa2lkcyUyMHNjaG9vbCUyMGNhcnxlbnwwfHx8fDE3OTAxOTkwOTJ8MA&ixlib=rb-4.1.0&q=85",
+    "neighborhood_edmonton": "https://images.unsplash.com/photo-1780234142053-418370615fa2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxoYXBweSUyMHNjaG9vbCUyMGNoaWxkcmVuJTIwc3VidXJiYW4lMjBuZWlnaGJvcmhvb2R8ZW58MHx8fHwxNzkwMTk5MDkyfDA&ixlib=rb-4.1.0&q=85",
+    "happy_children": "https://images.pexels.com/photos/8457621/pexels-photo-8457621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "schoolyard_friendship": "https://images.pexels.com/photos/5275805/pexels-photo-5275805.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "founder_profile": "https://images.unsplash.com/photo-1617285962341-73ee07b22ea2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwyfHxzbWlsaW5nJTIwbW9tJTIwcG9ydHJhaXQlMjBmYW1pbHklMjBjYXIlMjB2YW4lMjBkcml2ZXJ8ZW58MHx8fHwxNzkwMTk5MTAyfDA&ixlib=rb-4.1.0&q=85"
+  },
+  "motion_and_interactions": {
+    "smooth_scroll": "Lenis momentum smooth scrolling enabled on all main views",
+    "hero_reveal": "Framer motion line-by-line staggered text reveal on initial load",
+    "scroll_reveal": "Section components wrap content with Framer Motion scroll triggers (y: 20 -> 0, opacity 0 -> 1)",
+    "marquee": "Slow editorial text ticker (15s duration) with organic warm tint separator dots",
+    "interactive_cards": "Hover transform tilt & soft shadow lift (-translate-y-1 hover:shadow-xl)"
+  },
+  "pages_structure": [
+    {
+      "path": "/",
+      "name": "Home",
+      "sections": [
+        "Kinetic Hero with founder portrait & headline reveal",
+        "Trust Badges Strip (Background Check Passed, First-Aid Certified, Mom Driven, Door-to-Door, Live SMS Updates)",
+        "Why Families Choose Us (Bento grid of 4 pillars)",
+        "5-Step How It Works Preview",
+        "Meet Your Driver ([Your Name] - Mom of 3)",
+        "Testimonials / Community Love",
+        "Final Warm CTA Banner"
+      ]
+    },
+    {
+      "path": "/how-it-works",
+      "name": "How It Works",
+      "sections": [
+        "Interactive 5-Step Process breakdown (Schedule, Pickup, Live Track, Safe Arrival, Flexible Billing)",
+        "Daily Routine Timeline graphic",
+        "Safety & Vehicle Prep Standards"
+      ]
+    },
+    {
+      "path": "/services-and-pricing",
+      "name": "Services & Pricing",
+      "sections": [
+        "Monthly Route Tiers (Morning Drop, Afternoon Pick, Full Roundtrip)",
+        "McConachie & Surrounding Zones list",
+        "Sibling Discounts & Add-ons",
+        "Route Availability Status Indicators"
+      ]
+    },
+    {
+      "path": "/check-availability",
+      "name": "Check Route Availability",
+      "sections": [
+        "Interactive Route Inquiry Form (Parent Name, School, Neighborhood, Pickup/Drop Times, Kids Count)",
+        "Instant Route Matcher & Availability Result",
+        "Integrated Waitlist Component (if route is full or out of zone)",
+        "Submission Success Modal with Confirmation Code"
+      ]
+    },
+    {
+      "path": "/safety",
+      "name": "Safety & Trust",
+      "sections": [
+        "Detailed Driver Background & Driving Record Transparency",
+        "Vehicle Maintenance & Booster Seat Protocols",
+        "Communication Pledge & Emergency Response Protocols"
+      ]
+    },
+    {
+      "path": "/about",
+      "name": "About",
+      "sections": [
+        "Founder Story (Why [Your Name] started Mama's Rides)",
+        "Our McConachie Community Roots",
+        "Mom-to-Mom Care Manifesto"
+      ]
+    },
+    {
+      "path": "/faq",
+      "name": "FAQ",
+      "sections": [
+        "Categorized Accordions (Pickups, Safety, Cancellations, Weather/Winter Edmonton Driving)",
+        "Ask a Question Direct Form"
+      ]
+    },
+    {
+      "path": "/register-private-portal",
+      "name": "Registration (Private Link)",
+      "sections": [
+        "Comprehensive Student Intake Form",
+        "Emergency Contacts & Medical Notes",
+        "Route Contract Confirmation"
+      ]
+    },
+    {
+      "path": "/policies",
+      "name": "Policies",
+      "sections": [
+        "Privacy Policy, Snow Day / Winter Protocol, Cancellation & Refund Policy"
+      ]
+    },
+    {
+      "path": "/contact",
+      "name": "Contact",
+      "sections": [
+        "Direct Contact Info ((780) 555-1234, hello@mamasschoolrides.ca)",
+        "Quick Message Form",
+        "Service Zone Map Representation"
+      ]
+    }
+  ],
+  "reusable_components": {
+    "waitlist_component": "Card element displaying 'This route is currently full. Join our priority waitlist to be notified when a seat opens up!' with name & email input + instant submit confirmation",
+    "sticky_mobile_cta": "Bottom bar fixed on mobile screens with 'CHECK ROUTE AVAILABILITY' button always visible",
+    "trust_strip": "Horizontal strip featuring 5 icon badges (Criminal Record Checked, First-Aid Certified, Door-to-Door, SMS Notifications, Edmonton Local)",
+    "nav_bar": "Glassmorphism header with SVG Logo, desktop links, 'CHECK ROUTE AVAILABILITY' dominant CTA button, mobile drawer"
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow the provided colors, font classes, and warm organic editorial aesthetic.",
+    "Add data-testid to every interactive button, input, link, and major content card.",
+    "Use mock database handlers (localStorage or state) for the inquiry form and waitlist form submissions so user interactions complete gracefully with visual confirmations.",
+    "Ensure Lenis smooth scroll and Framer Motion animations run smoothly without blocking accessibility or user interactions."
+  ]
+}
