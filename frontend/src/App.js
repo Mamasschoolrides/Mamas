@@ -16,6 +16,8 @@ import FAQ from "@/pages/FAQ";
 import Policies from "@/pages/Policies";
 import Contact from "@/pages/Contact";
 import Admin from "@/pages/Admin";
+import PaymentSuccess from "@/pages/PaymentSuccess";
+import PaymentCancel from "@/pages/PaymentCancel";
 
 function useLenis() {
   useEffect(() => {
@@ -64,6 +66,8 @@ function Shell() {
           <Route path="/policies/:slug" element={<Policies />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/payment/success" element={<PaymentSuccess />} />
+          <Route path="/payment/cancel" element={<PaymentCancel />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

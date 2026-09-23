@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Header
+from fastapi import FastAPI, APIRouter, HTTPException, Header, Request
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -9,6 +9,8 @@ import uuid
 import ipaddress
 import jwt
 import httpx
+import stripe
+import asyncio
 from html import escape
 from html.parser import HTMLParser
 from urllib.parse import urlparse
@@ -384,6 +386,116 @@ async def set_route_status(update: RouteStatusUpdate, authorization: str = Heade
         upsert=True,
     )
     return {"ok": True, "routes_full": update.routes_full}
+
+
+stripe.api_key = os.environ.get("STRIPE_SECRET_KEY") or "sk_test_emergent"
+STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
+
+PLAN_LABELS = {
+    "roundtrip_monthly": "Round Trip — 1 child",
+    "oneway_monthly": "One-Way — 1 child",
+    "siblings2_monthly": "Round Trip — 2 children",
+    "siblings3_monthly": "Round Trip — 3 children",
+}
+
+
+class CheckoutRequest(BaseModel):
+    lookup_key: str
+    origin_url: str
+    registration_ref: Optional[str] = None
+
+
+@api_router.post("/payments/checkout")
+async def create_checkout(req: CheckoutRequest):
+    if req.lookup_key not in PLAN_LABELS:
+        raise HTTPException(status_code=422, detail="Unknown plan")
+    prices = stripe.Price.list(lookup_keys=[req.lookup_key], active=True, limit=1).data
+    if not prices:
+        raise HTTPException(status_code=500, detail=f"Price not found: {req.lookup_key}")
+    price = prices[0]
+    session = stripe.checkout.Session.create(
+        line_items=[{"price": price.id, "quantity": 1}],
+        mode="subscription" if price.recurring else "payment",
+        success_url=f"{req.origin_url}/payment/success?session_id={{CHECKOUT_SESSION_ID}}",
+        cancel_url=f"{req.origin_url}/payment/cancel",
+        automatic_tax={"enabled": True},
+        billing_address_collection="required",
+        metadata={"registration_ref": req.registration_ref or "", "lookup_key": req.lookup_key},
+    )
+    await db.payment_transactions.insert_one({
+        "session_id": session.id,
+        "registration_ref": req.registration_ref or "",
+        "lookup_key": req.lookup_key,
+        "amount": float(price.unit_amount or 0) / 100,
+        "currency": price.currency,
+        "status": "initiated",
+        "payment_status": "pending",
+        "created_at": now_iso(),
+        "updated_at": now_iso(),
+    })
+    return {"checkout_url": session.url, "session_id": session.id}
+
+
+async def _mark_paid(session_id: str, metadata: dict):
+    result = await db.payment_transactions.update_one(
+        {"session_id": session_id, "payment_status": {"$ne": "paid"}},
+        {"$set": {"status": "completed", "payment_status": "paid", "updated_at": now_iso()}},
+    )
+    if result.modified_count:
+        ref = (metadata or {}).get("registration_ref", "")
+        plan = (metadata or {}).get("lookup_key", "")
+        if ref:
+            await db.registrations.update_one({"reference": ref}, {"$set": {"payment_status": "paid"}})
+        txn = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
+        await notify_owner(f"Payment received — ${txn['amount']:.0f} {txn['currency'].upper()}", [
+            ("Plan", PLAN_LABELS.get(plan, plan)),
+            ("Registration", ref or "—"),
+            ("Session", session_id),
+        ])
+
+
+@api_router.get("/payments/status/{session_id}")
+async def get_payment_status(session_id: str):
+    record = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
+    if not record:
+        raise HTTPException(status_code=404, detail="Transaction not found")
+    if record.get("payment_status") != "paid":
+        try:
+            s = stripe.checkout.Session.retrieve(session_id)
+            if s.payment_status == "paid" or s.status == "complete":
+                await _mark_paid(session_id, s.metadata)
+                record = await db.payment_transactions.find_one({"session_id": session_id}, {"_id": 0})
+        except stripe.error.StripeError:
+            pass
+    return {
+        "session_id": record["session_id"],
+        "status": record["status"],
+        "payment_status": record["payment_status"],
+    }
+
+
+@api_router.post("/stripe/webhook")
+async def stripe_webhook(request: Request):
+    payload = await request.body()
+    sig = request.headers.get("stripe-signature", "")
+    try:
+        event = stripe.Webhook.construct_event(payload, sig, STRIPE_WEBHOOK_SECRET)
+    except stripe.error.SignatureVerificationError:
+        raise HTTPException(status_code=400, detail="Invalid signature")
+    obj, t = event["data"]["object"], event["type"]
+    if t == "checkout.session.completed":
+        await _mark_paid(obj["id"], obj.get("metadata") or {})
+    elif t == "checkout.session.async_payment_failed":
+        await db.payment_transactions.update_one(
+            {"session_id": obj["id"]},
+            {"$set": {"status": "failed", "payment_status": "failed", "updated_at": now_iso()}},
+        )
+    elif t == "checkout.session.expired":
+        await db.payment_transactions.update_one(
+            {"session_id": obj["id"]},
+            {"$set": {"status": "expired", "payment_status": "expired", "updated_at": now_iso()}},
+        )
+    return {"status": "ok"}
 
 
 app.include_router(api_router)

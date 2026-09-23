@@ -174,6 +174,7 @@ export default function Admin() {
       ["Parent", "parent_name"], ["Phone", "parent_phone"], ["Email", "parent_email"],
       ["Child", "child_legal_name"], ["School", "child_school"], ["Grade", "child_grade"],
       ["Address", "home_address"], ["Days", "days"], ["Safety Notes", "safety_info"],
+      ["Payment", "payment_status"],
     ],
     waitlist: [["Name", "name"], ["Email", "email"], ["Phone", "phone"], ["Note", "note"]],
   };

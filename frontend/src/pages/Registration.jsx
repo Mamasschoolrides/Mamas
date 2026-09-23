@@ -18,6 +18,13 @@ const initial = {
   agree_transportation: false, agree_payment: false, agree_accuracy: false,
 };
 
+const PLANS = [
+  { key: "roundtrip_monthly", label: "Round Trip", price: "$550/mo", desc: "One child, mornings + afternoons" },
+  { key: "oneway_monthly", label: "One-Way", price: "$425/mo", desc: "One child, mornings or afternoons" },
+  { key: "siblings2_monthly", label: "Two Children", price: "$900/mo", desc: "Two siblings, round trip" },
+  { key: "siblings3_monthly", label: "Three Children", price: "$1,150/mo", desc: "Three siblings, round trip" },
+];
+
 const Section = ({ n, title, children }) => (
   <section className="rounded-[2rem] border border-line bg-surface p-6 sm:p-8">
     <div className="mb-5 flex items-center gap-3">
@@ -48,6 +55,26 @@ export default function Registration() {
   const [errors, setErrors] = useState({});
   const [sending, setSending] = useState(false);
   const [reference, setReference] = useState(null);
+  const [plan, setPlan] = useState("");
+  const [paying, setPaying] = useState(false);
+  const [payError, setPayError] = useState("");
+
+  const pay = async () => {
+    if (!plan) return;
+    setPaying(true);
+    setPayError("");
+    try {
+      const { data } = await axios.post(`${API}/payments/checkout`, {
+        lookup_key: plan,
+        origin_url: window.location.origin,
+        registration_ref: reference,
+      });
+      window.location.href = data.checkout_url;
+    } catch {
+      setPayError("Couldn't start the secure payment — please try again, or text (780) 880-8566 to pay by e-transfer.");
+      setPaying(false);
+    }
+  };
 
   useEffect(() => {
     document.title = "Registration — Mama's School Rides";
@@ -112,20 +139,62 @@ export default function Registration() {
 
   if (reference) {
     return (
-      <div data-testid="registration-confirmation" className="mx-auto max-w-2xl px-4 py-24 text-center sm:px-6">
-        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage/15 text-sage">
-          <CheckCircle2 size={34} />
-        </span>
-        <h1 className="mt-6 font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-          Registration complete — welcome aboard!
-        </h1>
-        <p className="mt-4 leading-relaxed text-ink/70">
-          Your child's transportation profile has been received. The next step is the Parent Transportation
-          Agreement and payment setup — I'll be in touch shortly with everything you need to reserve the seat.
-        </p>
-        <p className="mt-6 inline-block rounded-2xl border border-line bg-surface px-5 py-3 text-sm text-ink/70">
-          Your reference: <strong data-testid="registration-reference" className="font-mono text-ink">{reference}</strong>
-        </p>
+      <div data-testid="registration-confirmation" className="mx-auto max-w-2xl px-4 py-24 sm:px-6">
+        <div className="text-center">
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage/15 text-sage">
+            <CheckCircle2 size={34} />
+          </span>
+          <h1 className="mt-6 font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            Registration complete — one step left!
+          </h1>
+          <p className="mx-auto mt-4 max-w-lg leading-relaxed text-ink/70">
+            Your child's transportation profile is in. The last step to officially reserve the seat is the
+            first month's payment — pick your plan below to pay securely by card, or arrange an e-transfer
+            by texting <a href="tel:+17808808566" className="font-semibold text-terra-dark">(780) 880-8566</a>.
+          </p>
+          <p className="mt-6 inline-block rounded-2xl border border-line bg-surface px-5 py-3 text-sm text-ink/70">
+            Your reference: <strong data-testid="registration-reference" className="font-mono text-ink">{reference}</strong>
+          </p>
+        </div>
+
+        <div className="mt-10 rounded-[2rem] border border-line bg-surface p-6 sm:p-8">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-terra">Reserve your seat</p>
+          <h2 className="mt-2 font-serif text-2xl font-semibold text-ink">Choose your monthly plan</h2>
+          <div className="mt-5 grid gap-3 sm:grid-cols-2">
+            {PLANS.map((p) => (
+              <button
+                key={p.key}
+                type="button"
+                onClick={() => setPlan(p.key)}
+                data-testid={`plan-${p.key}`}
+                className={`rounded-2xl border-2 p-5 text-left transition-all duration-200 ${
+                  plan === p.key
+                    ? "border-terra bg-blush shadow-lg shadow-terra/10"
+                    : "border-line bg-cream hover:border-terra/40"
+                }`}
+              >
+                <div className="flex items-baseline justify-between gap-2">
+                  <p className="font-semibold text-ink">{p.label}</p>
+                  <p className="font-serif text-xl font-semibold text-terra-dark">{p.price}</p>
+                </div>
+                <p className="mt-1 text-sm text-ink/60">{p.desc}</p>
+              </button>
+            ))}
+          </div>
+          {payError && <p data-testid="payment-error" className="mt-3 text-sm font-medium text-red-600">{payError}</p>}
+          <button
+            type="button"
+            onClick={pay}
+            disabled={!plan || paying}
+            data-testid="pay-now-btn"
+            className="mt-5 w-full rounded-full bg-terra py-4 text-sm font-bold uppercase tracking-wide text-white shadow-xl shadow-terra/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-terra-dark disabled:opacity-50"
+          >
+            {paying ? "Redirecting to secure payment…" : plan ? "Pay First Month & Reserve Seat" : "Select a plan above"}
+          </button>
+          <p className="mt-3 text-center text-xs text-ink/50">
+            Secure card payment by Stripe. First month reserves the seat; ongoing months are arranged directly.
+          </p>
+        </div>
       </div>
     );
   }
