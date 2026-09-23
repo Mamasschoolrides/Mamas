@@ -21,8 +21,10 @@ const POLICIES = {
       {
         h: "Part D — Fees",
         items: [
+          "One-time family registration fee: $75 per family, charged once with your first payment. This covers administrative onboarding, route planning, account setup and required documentation.",
+          "Additional children added to an existing family account after initial setup may be subject to a $25 onboarding fee per child.",
           "Monthly amount: as confirmed at registration (Round Trip $550/month, One-Way $425/month; siblings on the same route: +$350/month for the second child, +$250/month for the third).",
-          "Payment date: monthly fees are due in advance, on or before the first school day of each month.",
+          "Payment date: monthly fees are billed automatically to your card, starting on your payment date and repeating each month of service.",
           "Late payment: if payment is more than 5 days late, service may be paused until the account is current. We'll always reach out before pausing — life happens, talk to us.",
           "Failed payment: declined or returned payments must be corrected within 5 days; after that, the reserved seat may be released to a waitlisted family.",
           "Missed rides (sick days, vacations, schedule changes) are not automatically refunded or credited, as the seat is reserved for your child for the full month.",

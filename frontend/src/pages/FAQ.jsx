@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: "How much does it cost?",
-    a: "Round trip (morning and afternoon, Monday to Friday) is $550/month. One-way service — your choice of mornings or afternoons — is $425/month. Occasional one-way trips are $35–$40 each, subject to availability. Siblings from the same household on the same route ride at a reduced rate.",
+    a: "Round trip (morning and afternoon, Monday to Friday) is $550/month. One-way service — your choice of mornings or afternoons — is $425/month. Occasional one-way trips are $35–$40 each, subject to availability. New families pay a one-time $75 family registration fee with their first payment (covering onboarding, route planning, account setup and documentation), and monthly plans bill automatically by card. Siblings from the same household on the same route ride at reduced rates.",
   },
   {
     q: "Do you transport siblings?",

@@ -10,13 +10,22 @@ stripe.api_key = os.environ["STRIPE_SECRET_KEY"]
 CATALOG = [
     {
         "emergent_product_id": "school_rides_seat",
-        "name": "Mama's School Rides — Seat Reservation",
+        "name": "Mama's School Rides — Monthly Seat",
         "tax_code": "txcd_20060000",
         "prices": [
-            {"lookup_key": "roundtrip_monthly", "amount": 55000, "currency": "cad"},
-            {"lookup_key": "oneway_monthly", "amount": 42500, "currency": "cad"},
-            {"lookup_key": "siblings2_monthly", "amount": 90000, "currency": "cad"},
-            {"lookup_key": "siblings3_monthly", "amount": 115000, "currency": "cad"},
+            {"lookup_key": "roundtrip_monthly", "amount": 55000, "currency": "cad", "interval": "month"},
+            {"lookup_key": "oneway_monthly", "amount": 42500, "currency": "cad", "interval": "month"},
+            {"lookup_key": "siblings2_monthly", "amount": 90000, "currency": "cad", "interval": "month"},
+            {"lookup_key": "siblings3_monthly", "amount": 115000, "currency": "cad", "interval": "month"},
+        ],
+    },
+    {
+        "emergent_product_id": "registration_fee",
+        "name": "Mama's School Rides — One-Time Family Registration Fee",
+        "tax_code": "txcd_20060000",
+        "prices": [
+            {"lookup_key": "registration_fee", "amount": 7500, "currency": "cad"},
+            {"lookup_key": "child_onboarding_fee", "amount": 2500, "currency": "cad"},
         ],
     },
 ]
@@ -48,9 +57,16 @@ def main():
         product = get_or_create_product(entry)
         for price in entry["prices"]:
             existing = stripe.Price.list(lookup_keys=[price["lookup_key"]], active=True, limit=1).data
-            if existing and (existing[0].unit_amount != price["amount"] or existing[0].currency != price["currency"]):
-                stripe.Price.modify(existing[0].id, active=False)
-                existing = []
+            if existing:
+                cur = existing[0]
+                mismatched = (
+                    cur.unit_amount != price["amount"]
+                    or cur.currency != price["currency"]
+                    or bool(cur.recurring) != bool(price.get("interval"))
+                )
+                if mismatched:
+                    stripe.Price.modify(cur.id, active=False)
+                    existing = []
             if not existing:
                 kwargs = dict(
                     product=product.id, unit_amount=price["amount"], currency=price["currency"],

@@ -189,10 +189,13 @@ export default function Registration() {
             data-testid="pay-now-btn"
             className="mt-5 w-full rounded-full bg-terra py-4 text-sm font-bold uppercase tracking-wide text-white shadow-xl shadow-terra/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-terra-dark disabled:opacity-50"
           >
-            {paying ? "Redirecting to secure payment…" : plan ? "Pay First Month & Reserve Seat" : "Select a plan above"}
+            {paying ? "Redirecting to secure payment…" : plan ? "Pay & Reserve Seat" : "Select a plan above"}
           </button>
-          <p className="mt-3 text-center text-xs text-ink/50">
-            Secure card payment by Stripe. First month reserves the seat; ongoing months are arranged directly.
+          <p className="mt-3 text-center text-xs leading-relaxed text-ink/50">
+            Secure card payment by Stripe. First charge includes your first month plus a one-time $75
+            family registration fee (covers onboarding, route planning, account setup and documentation);
+            your plan then bills automatically each month — no e-transfers to chase.
+            Cancel anytime with notice per the Cancellation Policy.
           </p>
         </div>
       </div>

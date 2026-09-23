@@ -115,6 +115,13 @@ export default function Pricing() {
             </Reveal>
           ))}
         </div>
+        <p className="mt-5 mx-auto max-w-2xl text-center text-sm leading-relaxed text-ink/55">
+          New families pay a one-time <strong className="text-ink">$75 family registration fee</strong> with
+          their first payment — it covers administrative onboarding, route planning, account setup and
+          required documentation. Additional children added to an existing family account later may be
+          subject to a <strong className="text-ink">$25 onboarding fee</strong> per child. Plans bill
+          automatically each month by card.
+        </p>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">

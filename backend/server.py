@@ -410,12 +410,13 @@ async def create_checkout(req: CheckoutRequest):
     if req.lookup_key not in PLAN_LABELS:
         raise HTTPException(status_code=422, detail="Unknown plan")
     prices = stripe.Price.list(lookup_keys=[req.lookup_key], active=True, limit=1).data
-    if not prices:
+    fee = stripe.Price.list(lookup_keys=["registration_fee"], active=True, limit=1).data
+    if not prices or not fee:
         raise HTTPException(status_code=500, detail=f"Price not found: {req.lookup_key}")
     price = prices[0]
     session = stripe.checkout.Session.create(
-        line_items=[{"price": price.id, "quantity": 1}],
-        mode="subscription" if price.recurring else "payment",
+        line_items=[{"price": price.id, "quantity": 1}, {"price": fee[0].id, "quantity": 1}],
+        mode="subscription",
         success_url=f"{req.origin_url}/payment/success?session_id={{CHECKOUT_SESSION_ID}}",
         cancel_url=f"{req.origin_url}/payment/cancel",
         automatic_tax={"enabled": True},
@@ -426,7 +427,7 @@ async def create_checkout(req: CheckoutRequest):
         "session_id": session.id,
         "registration_ref": req.registration_ref or "",
         "lookup_key": req.lookup_key,
-        "amount": float(price.unit_amount or 0) / 100,
+        "amount": float((price.unit_amount or 0) + (fee[0].unit_amount or 0)) / 100,
         "currency": price.currency,
         "status": "initiated",
         "payment_status": "pending",
@@ -495,6 +496,11 @@ async def stripe_webhook(request: Request):
             {"session_id": obj["id"]},
             {"$set": {"status": "expired", "payment_status": "expired", "updated_at": now_iso()}},
         )
+    elif t == "invoice.payment_succeeded" and obj.get("billing_reason") == "subscription_cycle":
+        await notify_owner("Monthly payment received", [
+            ("Amount", f"${(obj.get('amount_paid') or 0) / 100:.2f} {obj.get('currency', 'cad').upper()}"),
+            ("Invoice", obj.get("id", "")),
+        ])
     return {"status": "ok"}
 
 

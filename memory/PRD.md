@@ -26,7 +26,7 @@ Warm, trustworthy marketing website for "Mama's School Rides," a private door-to
 - Founder photography (currently curated warm placeholders)
 - Policy pages are DRAFT text pending professional legal review
 
-## P1 done (2026-09-23): owner email alerts live (mamasschoolrides@gmail.com), inquiry status lookup by reference code, admin status controls, Stripe card payments (Flow A sandbox acct_1UIaQCECj2wjHCqr, test mode, CAD one-time first-month payments: 550/425/900/1150, tax_mode=calc_only, webhook /api/stripe/webhook + status polling /api/payments/status/{session_id})
+## P1 done (2026-09-23): owner email alerts live (mamasschoolrides@gmail.com), inquiry status lookup by reference code, admin status controls, Stripe card payments (Flow A sandbox acct_1UIaQCECj2wjHCqr, test mode, CAD monthly SUBSCRIPTIONS: 550/425/900/1150 + one-time $75 family registration fee + $25/child onboarding fee price exists for manual use, tax_mode=calc_only, webhook /api/stripe/webhook + status polling /api/payments/status/{session_id}, renewal emails on invoice.payment_succeeded)
 ## P1 remaining: recurring monthly billing (currently first-month one-time; ongoing months arranged directly)
 ## Backlog
 - P0: Real founder photo; legal review of policies
