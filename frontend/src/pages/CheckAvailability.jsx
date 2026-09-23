@@ -3,6 +3,7 @@ import axios from "axios";
 import { CheckCircle2, Info } from "lucide-react";
 import { MaskLine } from "@/components/Reveal";
 import { WaitlistCard } from "@/components/WaitlistCard";
+import { StatusLookup } from "@/components/StatusLookup";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -67,7 +68,7 @@ export default function CheckAvailability() {
       setReference(data.reference);
       window.__lenis?.scrollTo(0, { immediate: false });
     } catch {
-      setErrors({ submit: "Something went wrong sending your request — please try again, or call (780) 555-1234." });
+      setErrors({ submit: "Something went wrong sending your request — please try again, or call (780) 880-8566." });
     } finally {
       setSending(false);
     }
@@ -90,7 +91,7 @@ export default function CheckAvailability() {
           Your reference: <strong data-testid="inquiry-reference" className="font-mono text-ink">{reference}</strong>
         </p>
         <p className="mt-6 text-sm text-ink/50">
-          Questions in the meantime? Call or text <a href="tel:+17805551234" className="font-semibold text-terra-dark">(780) 555-1234</a>.
+          Questions in the meantime? Call or text <a href="tel:+17808808566" className="font-semibold text-terra-dark">(780) 880-8566</a>.
         </p>
       </div>
     );
@@ -109,6 +110,8 @@ export default function CheckAvailability() {
         Tell me a little about your family and your school run. This is an inquiry, not a booking —
         there's no commitment, and I'll personally get back to you.
       </p>
+
+      <StatusLookup />
 
       {routesFull && (
         <div className="mt-10">

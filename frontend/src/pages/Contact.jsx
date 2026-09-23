@@ -6,15 +6,15 @@ const CARDS = [
   {
     icon: Phone,
     label: "Call or text",
-    value: "(780) 555-1234",
-    href: "tel:+17805551234",
+    value: "(780) 880-8566",
+    href: "tel:+17808808566",
     note: "Fastest during the day — text anytime",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "hello@mamasschoolrides.ca",
-    href: "mailto:hello@mamasschoolrides.ca",
+    value: "mamasschoolrides@gmail.com",
+    href: "mailto:mamasschoolrides@gmail.com",
     note: "I reply within one business day",
   },
   {

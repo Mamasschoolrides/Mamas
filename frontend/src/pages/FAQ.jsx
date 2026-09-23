@@ -26,7 +26,7 @@ const FAQS = [
   },
   {
     q: "What happens if my child is sick?",
-    a: "Just call or text me at (780) 555-1234 at least one hour before pickup — no explanation needed beyond 'we're staying home today.' Please note that monthly fees reserve your child's seat, so sick days aren't automatically refunded or credited. Full details are in the Cancellation & Refund Policy.",
+    a: "Just call or text me at (780) 880-8566 at least one hour before pickup — no explanation needed beyond 'we're staying home today.' Please note that monthly fees reserve your child's seat, so sick days aren't automatically refunded or credited. Full details are in the Cancellation & Refund Policy.",
   },
   {
     q: "What happens if nobody is home at drop-off?",
@@ -62,7 +62,7 @@ const FAQS = [
   },
   {
     q: "How do I contact you?",
-    a: "Call or text (780) 555-1234, or email hello@mamasschoolrides.ca. I'm easiest to reach outside of route driving hours — but I always get back to parents the same day. For anything urgent during a route, text is fastest.",
+    a: "Call or text (780) 880-8566, or email mamasschoolrides@gmail.com. I'm easiest to reach outside of route driving hours — but I always get back to parents the same day. For anything urgent during a route, text is fastest.",
   },
 ];
 

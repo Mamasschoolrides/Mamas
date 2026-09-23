@@ -26,14 +26,14 @@ export default function About() {
               <div className="overflow-hidden rounded-[3rem] rounded-br-[6rem] shadow-2xl shadow-terra/15 ring-1 ring-line">
                 <img
                   src={FOUNDER_IMG}
-                  alt="[Your Name], founder of Mama's School Rides"
+                  alt="Manila, founder of Mama's School Rides"
                   data-testid="about-founder-photo"
                   className="aspect-[4/5] w-full object-cover"
                   loading="eager"
                 />
               </div>
               <div className="absolute -bottom-5 left-6 rounded-2xl border border-line bg-cream px-5 py-3 shadow-lg">
-                <p className="font-serif text-base font-semibold text-ink">[Your Name]</p>
+                <p className="font-serif text-base font-semibold text-ink">Manila</p>
                 <p className="text-xs text-ink/55">Founder • Driver • Mom of 3</p>
               </div>
             </div>
@@ -48,7 +48,7 @@ export default function About() {
             </Reveal>
             <Reveal delay={0.05}>
               <p>
-                Hi — I'm [Your Name], and I'm a mom of three living right here in McConachie. For years,
+                Hi — I'm Manila, and I'm a mom of three living right here in McConachie. For years,
                 my mornings looked like a relay race: lunches half-packed, one kid hunting for a missing
                 shoe, and me watching the clock, knowing a meeting was starting across the city whether
                 I was there or not.
@@ -86,7 +86,7 @@ export default function About() {
               </p>
             </Reveal>
             <Reveal delay={0.2}>
-              <p className="font-serif text-xl text-ink">— [Your Name]</p>
+              <p className="font-serif text-xl text-ink">— Manila</p>
             </Reveal>
             <Reveal delay={0.22}>
               <Link

@@ -224,7 +224,7 @@ export default function Home() {
               <div className="overflow-hidden rounded-[3rem] rounded-bl-[6rem] shadow-2xl shadow-terra/15 ring-1 ring-line">
                 <img
                   src={DRIVER_IMG}
-                  alt="[Your Name], founder and driver of Mama's School Rides"
+                  alt="Manila, founder and driver of Mama's School Rides"
                   data-testid="driver-photo"
                   className="aspect-[4/5] w-full object-cover"
                   loading="lazy"
@@ -238,7 +238,7 @@ export default function Home() {
           <Reveal delay={0.1}>
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-terra">Meet your driver</p>
             <h2 className="mt-3 font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Hi, I'm [Your Name] — and I'll be the one at the wheel.
+              Hi, I'm Manila — and I'll be the one at the wheel.
             </h2>
             <p className="mt-5 text-base leading-relaxed text-ink/70 sm:text-lg">
               I'm a mom of three, right here in the neighbourhood. I started Mama's School Rides because I

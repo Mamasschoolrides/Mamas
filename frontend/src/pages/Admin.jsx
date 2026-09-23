@@ -5,10 +5,18 @@ import { LogoMark } from "@/components/Logo";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 const TABS = ["inquiries", "registrations", "waitlist"];
+const STATUSES = ["new", "reviewing", "approved", "waitlisted", "registered"];
+const STATUS_STYLES = {
+  new: "bg-sun/20 text-amber-800",
+  reviewing: "bg-blush text-terra-dark",
+  approved: "bg-sage/20 text-green-800",
+  waitlisted: "bg-gold/30 text-amber-900",
+  registered: "bg-sage/25 text-green-900",
+};
 
 const fmt = (iso) => (iso ? new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" }) : "");
 
-function Rows({ items, fields }) {
+function Rows({ items, fields, onStatus }) {
   if (!items.length)
     return <p className="rounded-2xl border border-line bg-surface p-6 text-sm text-ink/55">Nothing here yet.</p>;
   return (
@@ -16,7 +24,17 @@ function Rows({ items, fields }) {
       {items.map((item) => (
         <div key={item.id} className="rounded-2xl border border-line bg-surface p-5" data-testid={`admin-row-${item.id}`}>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <p className="font-mono text-xs font-semibold text-terra-dark">{item.reference || "WL"}</p>
+            <div className="flex items-center gap-2.5">
+              <p className="font-mono text-xs font-semibold text-terra-dark">{item.reference || "WL"}</p>
+              {item.status && (
+                <span
+                  data-testid={`admin-status-${item.id}`}
+                  className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${STATUS_STYLES[item.status] || "bg-line text-ink/60"}`}
+                >
+                  {item.status}
+                </span>
+              )}
+            </div>
             <p className="text-xs text-ink/45">{fmt(item.created_at)}</p>
           </div>
           <dl className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
@@ -31,6 +49,23 @@ function Rows({ items, fields }) {
               ) : null
             )}
           </dl>
+          {onStatus && (
+            <div className="mt-4 flex flex-wrap items-center gap-1.5 border-t border-line/70 pt-3">
+              <span className="mr-1 text-[11px] font-bold uppercase tracking-wider text-ink/45">Set status:</span>
+              {STATUSES.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => onStatus(item.id, s)}
+                  data-testid={`admin-set-status-${item.id}-${s}`}
+                  className={`rounded-full px-3 py-1 text-[11px] font-semibold capitalize transition-colors ${
+                    item.status === s ? "bg-ink text-cream" : "border border-line text-ink/60 hover:border-terra hover:text-terra-dark"
+                  }`}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       ))}
     </div>
@@ -86,6 +121,18 @@ export default function Admin() {
       { headers: { Authorization: `Bearer ${token}` } }
     );
     setRoutesFull(next);
+  };
+
+  const setInquiryStatus = async (id, status) => {
+    await axios.post(
+      `${API}/admin/inquiries/${id}/status`,
+      { status },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    setData((d) => ({
+      ...d,
+      inquiries: d.inquiries.map((i) => (i.id === id ? { ...i, status } : i)),
+    }));
   };
 
   if (!token) {
@@ -190,7 +237,11 @@ export default function Admin() {
         </div>
 
         <div className="mt-6">
-          <Rows items={data[tab]} fields={fields[tab]} />
+          <Rows
+            items={data[tab]}
+            fields={fields[tab]}
+            onStatus={tab === "inquiries" ? setInquiryStatus : null}
+          />
         </div>
       </div>
     </div>

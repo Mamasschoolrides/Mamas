@@ -165,11 +165,11 @@ export default function Safety() {
               Check Route Availability <ArrowRight size={17} strokeWidth={2.6} />
             </Link>
             <a
-              href="tel:+17805551234"
+              href="tel:+17808808566"
               data-testid="safety-call-link"
               className="inline-flex items-center gap-2 rounded-full border-2 border-ink/15 px-7 py-[14px] text-sm font-bold uppercase tracking-wide text-ink transition-colors hover:border-terra hover:text-terra-dark"
             >
-              Call (780) 555-1234
+              Call (780) 880-8566
             </a>
           </div>
         </Reveal>

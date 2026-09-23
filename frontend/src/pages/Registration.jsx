@@ -104,7 +104,7 @@ export default function Registration() {
       setReference(data.reference);
       window.__lenis?.scrollTo(0, { immediate: false });
     } catch {
-      setErrors({ submit: "Something went wrong — please try again, or call (780) 555-1234." });
+      setErrors({ submit: "Something went wrong — please try again, or call (780) 880-8566." });
     } finally {
       setSending(false);
     }
@@ -275,7 +275,7 @@ export default function Registration() {
         <Section n="7" title="Absence Notification">
           <p className="text-sm leading-relaxed text-ink/70">
             If your child won't be riding on a given day, please let me know by call or text at{" "}
-            <strong className="text-ink">(780) 555-1234</strong> at least one hour before the scheduled
+            <strong className="text-ink">(780) 880-8566</strong> at least one hour before the scheduled
             pickup. This keeps the route on time for everyone and makes sure I never arrive at an empty
             door wondering where a child is.
           </p>

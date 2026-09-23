@@ -26,13 +26,17 @@ Warm, trustworthy marketing website for "Mama's School Rides," a private door-to
 - Founder photography (currently curated warm placeholders)
 - Policy pages are DRAFT text pending professional legal review
 
+## P1 done (2026-09-23): owner email alerts live (mamasschoolrides@gmail.com), inquiry status lookup by reference code, admin status controls
+## P1 remaining: online payment step (Stripe)
 ## Backlog
-- P0: Real founder photo + name/contact details; legal review of policies
-- P1: Email notification to owner on new inquiry/registration (Resend); online payment step (Stripe) to complete funnel
-- P2: Testimonials section, service-area map, inquiry status lookup by reference code, per-route (not global) full toggles
+- P0: Real founder photo; legal review of policies
+- P2: Testimonials section, service-area map, per-route (not global) full toggles
+
+## Contact details (real, confirmed by owner)
+Founder: Manila • Phone: (780) 880-8566 • Email: mamasschoolrides@gmail.com • Hours: Mon–Fri 7 AM–6 PM
 
 ## Next Tasks
-1. Swap in real founder details/photos
-2. Resend email notifications for new submissions
-3. Stripe payment link step after registration
-4. Professional legal review of the 6 policy documents
+1. Real founder photo swap
+2. Stripe payment link step after registration
+3. Professional legal review of the 6 policy documents
+4. Testimonials from first families
