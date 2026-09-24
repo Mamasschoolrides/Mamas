@@ -5,8 +5,8 @@ import { Reveal, MaskLine } from "@/components/Reveal";
 import { TrustStrip } from "@/components/TrustStrip";
 import { Marquee } from "@/components/Marquee";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1689866499898-cf0842274e60?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwxfHxzbWlsaW5nJTIwbW9tJTIwcG9ydHJhaXQlMjBmYW1pbHklMjBjYXIlMjB2YW4lMjBkcml2ZXJ8ZW58MHx8fHwxNzkwMTk5MTAyfDA&ixlib=rb-4.1.0&q=85";
-const DRIVER_IMG = "https://images.unsplash.com/photo-1617285962341-73ee07b22ea2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwyfHxzbWlsaW5nJTIwbW9tJTIwcG9ydHJhaXQlMjBmYW1pbHklMjBjYXIlMjB2YW4lMjBkcml2ZXJ8ZW58MHx8fHwxNzkwMTk5MTAyfDA&ixlib=rb-4.1.0&q=85";
+const HERO_IMG = "/founder.jpg";
+const DRIVER_IMG = "/founder.jpg";
 
 const FEATURES = [
   {
@@ -132,9 +132,9 @@ export default function Home() {
               <div className="overflow-hidden rounded-[3rem] rounded-tr-[7rem] shadow-2xl shadow-terra/20 ring-1 ring-line">
                 <img
                   src={HERO_IMG}
-                  alt="Your driver — a local mom — smiling beside her vehicle"
+                  alt="Manila, founder and driver of Mama's School Rides"
                   data-testid="hero-image"
-                  className="aspect-[4/5] w-full object-cover"
+                  className="aspect-[4/5] w-full object-cover object-top"
                   loading="eager"
                 />
               </div>

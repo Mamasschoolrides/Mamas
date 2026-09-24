@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Reveal, MaskLine } from "@/components/Reveal";
 import { TrustStrip } from "@/components/TrustStrip";
 
-const FOUNDER_IMG = "https://images.unsplash.com/photo-1617285962341-73ee07b22ea2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwyfHxzbWlsaW5nJTIwbW9tJTIwcG9ydHJhaXQlMjBmYW1pbHklMjBjYXIlMjB2YW4lMjBkcml2ZXJ8ZW58MHx8fHwxNzkwMTk5MTAyfDA&ixlib=rb-4.1.0&q=85";
+const FOUNDER_IMG = "/founder.jpg";
 const KIDS_IMG = "https://images.pexels.com/photos/8457621/pexels-photo-8457621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
 export default function About() {
