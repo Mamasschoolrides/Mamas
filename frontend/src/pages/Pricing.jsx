@@ -36,7 +36,7 @@ const TIERS = [
   },
   {
     name: "Occasional",
-    price: "$35–$40",
+    price: "$25",
     unit: "per one-way trip",
     tag: null,
     blurb: "For the odd day life gets complicated — a work trip, an appointment, a schedule clash.",
