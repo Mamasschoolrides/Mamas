@@ -101,7 +101,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <Link
-                  to="/check-availability"
+                  to={t.name === "Occasional" ? "/book-occasional" : "/check-availability"}
                   data-testid={`pricing-check-availability-btn-${i}`}
                   className={`mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 ${
                     t.featured
@@ -109,7 +109,7 @@ export default function Pricing() {
                       : "bg-terra text-white shadow-lg shadow-terra/25 hover:bg-terra-dark"
                   }`}
                 >
-                  Check Availability <ArrowRight size={16} strokeWidth={2.6} />
+                  {t.name === "Occasional" ? "Book & Pay — $25" : "Check Availability"} <ArrowRight size={16} strokeWidth={2.6} />
                 </Link>
               </div>
             </Reveal>

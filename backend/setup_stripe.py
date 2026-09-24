@@ -28,6 +28,14 @@ CATALOG = [
             {"lookup_key": "child_onboarding_fee", "amount": 2500, "currency": "cad"},
         ],
     },
+    {
+        "emergent_product_id": "occasional_trip",
+        "name": "Mama's School Rides — Occasional One-Way Trip",
+        "tax_code": "txcd_20060000",
+        "prices": [
+            {"lookup_key": "occasional_trip", "amount": 2500, "currency": "cad"},
+        ],
+    },
 ]
 
 

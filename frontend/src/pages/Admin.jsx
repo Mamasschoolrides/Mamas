@@ -4,7 +4,7 @@ import { Lock, LogOut, RefreshCw } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
-const TABS = ["inquiries", "registrations", "waitlist"];
+const TABS = ["inquiries", "registrations", "occasional", "waitlist"];
 const STATUSES = ["new", "reviewing", "approved", "waitlisted", "registered"];
 const STATUS_STYLES = {
   new: "bg-sun/20 text-amber-800",
@@ -12,6 +12,8 @@ const STATUS_STYLES = {
   approved: "bg-sage/20 text-green-800",
   waitlisted: "bg-gold/30 text-amber-900",
   registered: "bg-sage/25 text-green-900",
+  paid: "bg-sage/25 text-green-900",
+  pending: "bg-sun/20 text-amber-800",
 };
 
 const fmt = (iso) => (iso ? new Date(iso).toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" }) : "");
@@ -26,12 +28,20 @@ function Rows({ items, fields, onStatus }) {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-2.5">
               <p className="font-mono text-xs font-semibold text-terra-dark">{item.reference || "WL"}</p>
-              {item.status && (
+              {item.status && !item.payment_status && (
                 <span
                   data-testid={`admin-status-${item.id}`}
                   className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${STATUS_STYLES[item.status] || "bg-line text-ink/60"}`}
                 >
                   {item.status}
+                </span>
+              )}
+              {item.payment_status && (
+                <span
+                  data-testid={`admin-payment-${item.id}`}
+                  className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide ${STATUS_STYLES[item.payment_status] || "bg-line text-ink/60"}`}
+                >
+                  {item.payment_status === "paid" ? "Paid" : "Payment pending"}
                 </span>
               )}
             </div>
@@ -77,19 +87,20 @@ export default function Admin() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [tab, setTab] = useState("inquiries");
-  const [data, setData] = useState({ inquiries: [], registrations: [], waitlist: [] });
+  const [data, setData] = useState({ inquiries: [], registrations: [], occasional: [], waitlist: [] });
   const [routesFull, setRoutesFull] = useState(false);
 
   const load = useCallback(async (t) => {
     try {
       const headers = { Authorization: `Bearer ${t}` };
-      const [inq, reg, wl, status] = await Promise.all([
+      const [inq, reg, occ, wl, status] = await Promise.all([
         axios.get(`${API}/admin/inquiries`, { headers }),
         axios.get(`${API}/admin/registrations`, { headers }),
+        axios.get(`${API}/admin/occasional`, { headers }),
         axios.get(`${API}/admin/waitlist`, { headers }),
         axios.get(`${API}/route-status`),
       ]);
-      setData({ inquiries: inq.data, registrations: reg.data, waitlist: wl.data });
+      setData({ inquiries: inq.data, registrations: reg.data, occasional: occ.data, waitlist: wl.data });
       setRoutesFull(!!status.data.routes_full);
     } catch {
       sessionStorage.removeItem("msr_admin");
@@ -176,6 +187,11 @@ export default function Admin() {
       ["Address", "home_address"], ["Days", "days"], ["Safety Notes", "safety_info"],
       ["Payment", "payment_status"],
     ],
+    occasional: [
+      ["Parent", "parent_name"], ["Phone", "phone"], ["Email", "email"], ["Child", "child_name"],
+      ["School", "school"], ["Trip Date", "trip_date"], ["Direction", "direction"],
+      ["Pickup", "pickup_address"], ["Drop-off", "dropoff_address"], ["Notes", "notes"],
+    ],
     waitlist: [["Name", "name"], ["Email", "email"], ["Phone", "phone"], ["Note", "note"]],
   };
 
@@ -222,7 +238,7 @@ export default function Admin() {
           </button>
         </div>
 
-        <div className="mt-6 flex gap-2">
+        <div className="mt-6 flex flex-wrap gap-2">
           {TABS.map((t) => (
             <button
               key={t}
@@ -232,7 +248,7 @@ export default function Admin() {
                 tab === t ? "bg-terra text-white" : "border border-line bg-surface text-ink/70"
               }`}
             >
-              {t} ({data[t].length})
+              {t === "occasional" ? "Occasional Trips" : t} ({data[t].length})
             </button>
           ))}
         </div>

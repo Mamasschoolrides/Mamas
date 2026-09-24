@@ -46,7 +46,7 @@ const FAQS = [
   },
   {
     q: "Can I book occasional rides?",
-    a: "Yes — occasional one-way trips are $25 each, subject to availability on the route. Monthly riders get first priority on seats, so booking occasional trips in advance is always a good idea. Submit a route inquiry to get started.",
+    a: "Yes — occasional one-way trips are $25 each, subject to availability on the route. You can book and pay by card right on the Services & Pricing page (tap the Occasional plan) — I'll confirm by text, and if the trip isn't possible you're refunded in full. Monthly riders get first priority on seats, so booking in advance is always a good idea.",
   },
   {
     q: "How far in advance should I register?",

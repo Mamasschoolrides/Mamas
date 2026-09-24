@@ -9,6 +9,7 @@ export default function PaymentSuccess() {
   const [params] = useSearchParams();
   const sessionId = params.get("session_id");
   const [state, setState] = useState("checking");
+  const [kind, setKind] = useState("subscription");
 
   useEffect(() => {
     if (!sessionId) {
@@ -19,6 +20,7 @@ export default function PaymentSuccess() {
     const poll = async () => {
       try {
         const { data } = await axios.get(`${API}/payments/status/${sessionId}`);
+        if (data.kind) setKind(data.kind);
         if (data.payment_status === "paid") {
           setState("paid");
           return;
@@ -33,6 +35,8 @@ export default function PaymentSuccess() {
     poll();
   }, [sessionId]);
 
+  const occasional = kind === "occasional";
+
   return (
     <div data-testid="payment-success-page" className="mx-auto max-w-xl px-4 py-24 text-center sm:px-6">
       {state === "checking" && (
@@ -42,7 +46,31 @@ export default function PaymentSuccess() {
           <p className="mt-3 text-ink/60">One moment while we check with the card processor.</p>
         </>
       )}
-      {state === "paid" && (
+      {state === "paid" && occasional && (
+        <>
+          <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage/15 text-sage">
+            <CheckCircle2 size={34} />
+          </span>
+          <h1 className="mt-6 font-serif text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+            Trip booked!
+          </h1>
+          <p className="mt-4 leading-relaxed text-ink/70">
+            Payment received — thank you. I'll review the trip against my routes and confirm by text shortly.
+            If it turns out the trip isn't possible, your $25 is refunded in full.
+          </p>
+          <p className="mt-6 text-sm text-ink/50">
+            Questions? Call or text <a href="tel:+17808808566" className="font-semibold text-terra-dark">(780) 880-8566</a>.
+          </p>
+          <Link
+            to="/"
+            data-testid="payment-success-home-link"
+            className="mt-8 inline-block rounded-full bg-terra px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-lg shadow-terra/25 transition-all duration-300 hover:-translate-y-0.5 hover:bg-terra-dark"
+          >
+            Back to Home
+          </Link>
+        </>
+      )}
+      {state === "paid" && !occasional && (
         <>
           <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-sage/15 text-sage">
             <CheckCircle2 size={34} />
