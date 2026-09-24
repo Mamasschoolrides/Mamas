@@ -18,7 +18,6 @@ import Contact from "@/pages/Contact";
 import Admin from "@/pages/Admin";
 import PaymentSuccess from "@/pages/PaymentSuccess";
 import PaymentCancel from "@/pages/PaymentCancel";
-import BookOccasional from "@/pages/BookOccasional";
 
 function useLenis() {
   useEffect(() => {
@@ -69,7 +68,6 @@ function Shell() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/payment/success" element={<PaymentSuccess />} />
           <Route path="/payment/cancel" element={<PaymentCancel />} />
-          <Route path="/book-occasional" element={<BookOccasional />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

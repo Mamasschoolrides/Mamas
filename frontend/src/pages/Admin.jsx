@@ -4,7 +4,7 @@ import { Lock, LogOut, RefreshCw } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
-const TABS = ["inquiries", "registrations", "occasional", "waitlist"];
+const TABS = ["inquiries", "registrations", "waitlist"];
 const STATUSES = ["new", "reviewing", "approved", "waitlisted", "registered"];
 const STATUS_STYLES = {
   new: "bg-sun/20 text-amber-800",
@@ -87,20 +87,19 @@ export default function Admin() {
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
   const [tab, setTab] = useState("inquiries");
-  const [data, setData] = useState({ inquiries: [], registrations: [], occasional: [], waitlist: [] });
+  const [data, setData] = useState({ inquiries: [], registrations: [], waitlist: [] });
   const [routesFull, setRoutesFull] = useState(false);
 
   const load = useCallback(async (t) => {
     try {
       const headers = { Authorization: `Bearer ${t}` };
-      const [inq, reg, occ, wl, status] = await Promise.all([
+      const [inq, reg, wl, status] = await Promise.all([
         axios.get(`${API}/admin/inquiries`, { headers }),
         axios.get(`${API}/admin/registrations`, { headers }),
-        axios.get(`${API}/admin/occasional`, { headers }),
         axios.get(`${API}/admin/waitlist`, { headers }),
         axios.get(`${API}/route-status`),
       ]);
-      setData({ inquiries: inq.data, registrations: reg.data, occasional: occ.data, waitlist: wl.data });
+      setData({ inquiries: inq.data, registrations: reg.data, waitlist: wl.data });
       setRoutesFull(!!status.data.routes_full);
     } catch {
       sessionStorage.removeItem("msr_admin");
@@ -187,11 +186,6 @@ export default function Admin() {
       ["Address", "home_address"], ["Days", "days"], ["Safety Notes", "safety_info"],
       ["Payment", "payment_status"],
     ],
-    occasional: [
-      ["Parent", "parent_name"], ["Phone", "phone"], ["Email", "email"], ["Child", "child_name"],
-      ["School", "school"], ["Trip Date", "trip_date"], ["Direction", "direction"],
-      ["Pickup", "pickup_address"], ["Drop-off", "dropoff_address"], ["Notes", "notes"],
-    ],
     waitlist: [["Name", "name"], ["Email", "email"], ["Phone", "phone"], ["Note", "note"]],
   };
 
@@ -248,7 +242,7 @@ export default function Admin() {
                 tab === t ? "bg-terra text-white" : "border border-line bg-surface text-ink/70"
               }`}
             >
-              {t === "occasional" ? "Occasional Trips" : t} ({data[t].length})
+              {t} ({data[t].length})
             </button>
           ))}
         </div>

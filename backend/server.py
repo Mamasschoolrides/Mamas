@@ -388,64 +388,6 @@ async def set_route_status(update: RouteStatusUpdate, authorization: str = Heade
     return {"ok": True, "routes_full": update.routes_full}
 
 
-class OccasionalBooking(BaseModel):
-    parent_name: str
-    phone: str
-    email: EmailStr
-    child_name: str
-    school: str
-    pickup_address: str
-    dropoff_address: str
-    trip_date: str
-    direction: str
-    notes: Optional[str] = ""
-    origin_url: str
-
-
-@api_router.post("/occasional/checkout")
-async def occasional_checkout(input: OccasionalBooking):
-    doc = input.model_dump()
-    origin_url = doc.pop("origin_url")
-    prices = stripe.Price.list(lookup_keys=["occasional_trip"], active=True, limit=1).data
-    if not prices:
-        raise HTTPException(status_code=500, detail="Price not found: occasional_trip")
-    price = prices[0]
-    doc["id"] = str(uuid.uuid4())
-    doc["reference"] = f"OC-{uuid.uuid4().hex[:6].upper()}"
-    doc["payment_status"] = "pending"
-    doc["status"] = "new"
-    doc["created_at"] = now_iso()
-    session = stripe.checkout.Session.create(
-        line_items=[{"price": price.id, "quantity": 1}],
-        mode="payment",
-        success_url=f"{origin_url}/payment/success?session_id={{CHECKOUT_SESSION_ID}}",
-        cancel_url=f"{origin_url}/payment/cancel",
-        automatic_tax={"enabled": True},
-        billing_address_collection="required",
-        metadata={"booking_ref": doc["reference"], "lookup_key": "occasional_trip"},
-    )
-    doc["session_id"] = session.id
-    await db.occasional_bookings.insert_one(doc)
-    await db.payment_transactions.insert_one({
-        "session_id": session.id,
-        "booking_ref": doc["reference"],
-        "lookup_key": "occasional_trip",
-        "amount": float(price.unit_amount or 0) / 100,
-        "currency": price.currency,
-        "status": "initiated",
-        "payment_status": "pending",
-        "created_at": now_iso(),
-        "updated_at": now_iso(),
-    })
-    return {"checkout_url": session.url, "session_id": session.id, "reference": doc["reference"]}
-
-
-@api_router.get("/admin/occasional")
-async def list_occasional(authorization: str = Header(None)):
-    require_admin(authorization)
-    return await db.occasional_bookings.find({}, {"_id": 0}).sort("created_at", -1).to_list(500)
-
-
 stripe.api_key = os.environ.get("STRIPE_SECRET_KEY") or "sk_test_emergent"
 STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "")
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, Users, FileText } from "lucide-react";
+import { ArrowRight, Check, FileText } from "lucide-react";
 import { Reveal, MaskLine } from "@/components/Reveal";
 
 const TIERS = [
@@ -35,16 +35,18 @@ const TIERS = [
     featured: false,
   },
   {
-    name: "Occasional",
-    price: "$25",
-    unit: "per one-way trip",
+    name: "Sibling Rates",
+    price: "$900",
+    unit: "/month for two",
     tag: null,
-    blurb: "For the odd day life gets complicated — a work trip, an appointment, a schedule clash.",
+    blurb: "Kids from the same household on the same route and schedule ride for less.",
     features: [
-      "Single one-way trips as needed",
-      "Subject to route availability",
-      "Book in advance where possible",
-      "Great for trying us out",
+      "First child — $550/month",
+      "Second sibling — +$350/month",
+      "Third sibling — +$250/month",
+      "Two children total: $900/month",
+      "Three children total: $1,150/month",
+      "One pickup, one drop-off, one bill",
     ],
     featured: false,
   },
@@ -101,7 +103,7 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <Link
-                  to={t.name === "Occasional" ? "/book-occasional" : "/check-availability"}
+                  to="/check-availability"
                   data-testid={`pricing-check-availability-btn-${i}`}
                   className={`mt-8 inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:-translate-y-0.5 ${
                     t.featured
@@ -109,7 +111,7 @@ export default function Pricing() {
                       : "bg-terra text-white shadow-lg shadow-terra/25 hover:bg-terra-dark"
                   }`}
                 >
-                  {t.name === "Occasional" ? "Book & Pay — $25" : "Check Availability"} <ArrowRight size={16} strokeWidth={2.6} />
+                  Check Availability <ArrowRight size={16} strokeWidth={2.6} />
                 </Link>
               </div>
             </Reveal>
@@ -126,45 +128,6 @@ export default function Pricing() {
 
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <Reveal>
-          <div data-testid="sibling-pricing" className="grid gap-8 rounded-[2rem] border border-line bg-surface p-8 sm:p-10 lg:grid-cols-[auto_1fr] lg:items-center">
-            <span className="flex h-16 w-16 items-center justify-center rounded-3xl bg-blush text-terra">
-              <Users size={30} strokeWidth={2} />
-            </span>
-            <div>
-              <h2 className="font-serif text-2xl font-semibold text-ink sm:text-3xl">Siblings ride together for less.</h2>
-              <p className="mt-3 max-w-2xl leading-relaxed text-ink/70">
-                For kids from the same household riding the same route and schedule, each additional child
-                costs less than the first:
-              </p>
-              <div className="mt-6 grid max-w-2xl gap-3 sm:grid-cols-3">
-                <div data-testid="sibling-rate-1" className="rounded-2xl border border-line bg-cream p-5 text-center">
-                  <p className="text-xs font-bold uppercase tracking-widest text-ink/50">First child</p>
-                  <p className="mt-1.5 font-serif text-3xl font-semibold text-ink">$550<span className="text-sm font-sans font-medium text-ink/55">/mo</span></p>
-                </div>
-                <div data-testid="sibling-rate-2" className="rounded-2xl border border-line bg-cream p-5 text-center">
-                  <p className="text-xs font-bold uppercase tracking-widest text-ink/50">Second sibling</p>
-                  <p className="mt-1.5 font-serif text-3xl font-semibold text-ink">+$350<span className="text-sm font-sans font-medium text-ink/55">/mo</span></p>
-                </div>
-                <div data-testid="sibling-rate-3" className="rounded-2xl border border-line bg-cream p-5 text-center">
-                  <p className="text-xs font-bold uppercase tracking-widest text-ink/50">Third sibling</p>
-                  <p className="mt-1.5 font-serif text-3xl font-semibold text-ink">+$250<span className="text-sm font-sans font-medium text-ink/55">/mo</span></p>
-                </div>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2.5 text-sm font-semibold">
-                <span className="rounded-full bg-blush px-4 py-1.5 text-terra-dark">1 child: $550/mo</span>
-                <span className="rounded-full bg-blush px-4 py-1.5 text-terra-dark">2 children: $900/mo</span>
-                <span className="rounded-full bg-blush px-4 py-1.5 text-terra-dark">3 children: $1,150/mo</span>
-              </div>
-              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink/60">
-                Sibling rates apply to round-trip service from the same household on the same route and
-                schedule. Mention your crew on the route inquiry and I'll confirm the exact total for your
-                family — it's one of my favourite ways to help local families.
-              </p>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.1}>
           <div data-testid="pricing-disclaimer" className="mt-6 flex items-start gap-4 rounded-3xl border border-line bg-blush/50 p-6 sm:p-7">
             <FileText className="mt-0.5 shrink-0 text-terra" size={22} />
             <p className="text-sm leading-relaxed text-ink/70">

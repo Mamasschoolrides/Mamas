@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: "How much does it cost?",
-    a: "Round trip (morning and afternoon, Monday to Friday) is $550/month. One-way service — your choice of mornings or afternoons — is $425/month. Occasional one-way trips are $25 each, subject to availability. New families pay a one-time $75 family registration fee with their first payment (covering onboarding, route planning, account setup and documentation), and monthly plans bill automatically by card. Siblings from the same household on the same route ride at reduced rates.",
+    a: "Round trip (morning and afternoon, Monday to Friday) is $550/month. One-way service — your choice of mornings or afternoons — is $425/month. New families pay a one-time $75 family registration fee with their first payment (covering onboarding, route planning, account setup and documentation), and monthly plans bill automatically by card. Siblings from the same household on the same route ride at reduced rates — see the sibling answer below.",
   },
   {
     q: "Do you transport siblings?",
@@ -43,10 +43,6 @@ const FAQS = [
   {
     q: "Can I change my pickup address?",
     a: "Yes — moves happen! Give me as much notice as you can. If your new address fits the existing route, we simply update it. If it's outside the current route, I'll let you know honestly whether I can accommodate it or add you to the waitlist for a closer route.",
-  },
-  {
-    q: "Can I book occasional rides?",
-    a: "Yes — occasional one-way trips are $25 each, subject to availability on the route. You can book and pay by card right on the Services & Pricing page (tap the Occasional plan) — I'll confirm by text, and if the trip isn't possible you're refunded in full. Monthly riders get first priority on seats, so booking in advance is always a good idea.",
   },
   {
     q: "How far in advance should I register?",

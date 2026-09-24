@@ -16,7 +16,7 @@ const POLICIES = {
       },
       {
         h: "Part C — Services",
-        p: "You are purchasing private, door-to-door school transportation as selected at registration: Round Trip (morning home→school and afternoon school→home, Monday–Friday on school days), One-Way (morning or afternoon, Monday–Friday), or Occasional trips as individually booked and confirmed. Morning pickup occurs at your front door or driveway; school drop-off occurs at the school's main entrance or designated area; afternoon service is the reverse, with your child released only to you or an authorized adult on your registration list.",
+        p: "You are purchasing private, door-to-door school transportation as selected at registration: Round Trip (morning home→school and afternoon school→home, Monday–Friday on school days) or One-Way (morning or afternoon, Monday–Friday). Morning pickup occurs at your front door or driveway; school drop-off occurs at the school's main entrance or designated area; afternoon service is the reverse, with your child released only to you or an authorized adult on your registration list.",
       },
       {
         h: "Part D — Fees",
@@ -96,10 +96,6 @@ const POLICIES = {
       {
         h: "Service interruptions",
         p: "If Mama's School Rides must cancel service for an extended period (for example, due to severe weather events or driver illness), affected days will be addressed fairly and communicated directly. See the Weather & Service Interruption Policy.",
-      },
-      {
-        h: "Occasional trips",
-        p: "Occasional one-way trips that are cancelled with at least 24 hours notice will not be charged. Trips cancelled with less notice may be charged in full.",
       },
       {
         h: "Termination",
